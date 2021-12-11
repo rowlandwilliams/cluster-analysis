@@ -1,15 +1,16 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { ClusterAnalysis } from '../components/ClusterAnalysis/ClusterAnalysis';
 
 const Home: NextPage = () => {
     return (
-        <div className="">
+        <div className="w-full h-screen bg-bg-gray font-inconsolata-regular p-2">
             <Head>
-                <title>Visualisation</title>
-                <meta name="description" content="Sankey" />
+                <title>Cluster Analysis</title>
+                <meta name="description" content="Cluster" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div>nice viz</div>
+            <ClusterAnalysis />
         </div>
     );
 };

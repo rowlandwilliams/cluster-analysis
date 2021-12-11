@@ -2,15 +2,16 @@
     "name": "sankey",
     "private": true,
     "scripts": {
-        "dev": "concurrently -n NEXT,TS -c magenta,cyan \"next dev -p 3000\" \"npm run ts --watch\"",
+        "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint",
-        "ts": "tsc --noEmit --incremental --preserveWatchOutput --pretty"
+        "lint": "next lint"
     },
     "dependencies": {
         "classnames": "^2.2.6",
-        "d3": "^7.2.0",
+        "d3-axis": "^3.0.0",
+        "d3-scale": "^4.0.2",
+        "d3-selection": "^3.0.0",
         "lodash": "^4.17.21",
         "next": "12.0.7",
         "react": "17.0.2",
@@ -21,8 +22,9 @@
     "devDependencies": {
         "@testing-library/jest-dom": "^5.14.1",
         "@types/classnames": "^2.3.1",
-        "@types/d3": "^7.1.0",
-        "@types/d3-sankey": "^0.11.2",
+        "@types/d3-axis": "^3.0.1",
+        "@types/d3-scale": "^4.0.2",
+        "@types/d3-selection": "^3.0.2",
         "@types/lodash": "^4.14.177",
         "@types/node": "16.11.12",
         "@types/react": "17.0.37",
