@@ -1,14 +1,13 @@
 import { debounce } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
-import { getMainGraphSelections, getXAxis, getYAxis } from './utils/plot';
+import { plotMainGraph } from './utils/plot';
 import { graphMargin } from './utils/general';
-import { selectAll } from 'd3-selection';
 import { AxisLines } from './AxisLines/AxisLines';
 
 export const MainGraph = () => {
     const parentRef = useRef<HTMLDivElement>(null);
-    const [parentWidth, setParentWidth] = useState(0);
-    const [parentHeight, setParentHeight] = useState(0);
+    const [parentWidth, setParentWidth] = useState(100);
+    const [parentHeight, setParentHeight] = useState(100);
 
     const handleWindowResize = debounce((current: HTMLDivElement) => {
         setParentWidth(current.offsetWidth);
@@ -27,19 +26,7 @@ export const MainGraph = () => {
     }, [handleWindowResize, parentWidth, parentHeight]);
 
     useEffect(() => {
-        const plotMainGraph = () => {
-            const { xAxisGroup, yAxisGroup } = getMainGraphSelections();
-
-            const xAxis = getXAxis(parentWidth, parentHeight);
-            xAxisGroup.call(xAxis);
-
-            const yAxis = getYAxis(parentWidth, parentHeight);
-            yAxisGroup.call(yAxis);
-
-            selectAll('.tick > line, .domain').attr('stroke-width', '0.1');
-        };
-
-        plotMainGraph();
+        plotMainGraph(parentWidth, parentHeight);
     }, [parentWidth, parentHeight]);
 
     return (
@@ -48,14 +35,15 @@ export const MainGraph = () => {
                 <g
                     id="x-axis-main"
                     transform={`translate(0,${parentHeight - graphMargin.top})`}
-                    className="stroke-current text-chart-grid-grey font-inconsolata-regular"
+                    className="stroke-current text-chart-grid-grey font-inconsolata-regular stroke-0"
                 ></g>
                 <g
                     id="y-axis-main"
                     transform={`translate(${graphMargin.left}, 0)`}
-                    className="stroke-current text-chart-grid-grey font-inconsolata-regular"
+                    className="stroke-current text-chart-grid-grey font-inconsolata-regular stroke-0"
                 ></g>
                 <AxisLines parentWidth={parentWidth} parentHeight={parentHeight} />
+                <g id="brush-main"></g>
             </svg>
         </div>
     );

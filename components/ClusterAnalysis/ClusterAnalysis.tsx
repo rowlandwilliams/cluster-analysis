@@ -7,7 +7,7 @@ export const ClusterAnalysis = () => {
             <GraphHeader />
             <div className="h-96 p-4 flex">
                 <MainGraph />
-                <div className="w-1/2">Graph 2</div>
+                {/* <MainGraph /> */}
             </div>
         </div>
     );

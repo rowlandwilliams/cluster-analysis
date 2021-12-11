@@ -10,6 +10,7 @@
     "dependencies": {
         "classnames": "^2.2.6",
         "d3-axis": "^3.0.0",
+        "d3-brush": "^3.0.0",
         "d3-scale": "^4.0.2",
         "d3-selection": "^3.0.0",
         "lodash": "^4.17.21",
@@ -23,6 +24,7 @@
         "@testing-library/jest-dom": "^5.14.1",
         "@types/classnames": "^2.3.1",
         "@types/d3-axis": "^3.0.1",
+        "@types/d3-brush": "^3.0.1",
         "@types/d3-scale": "^4.0.2",
         "@types/d3-selection": "^3.0.2",
         "@types/lodash": "^4.14.177",
