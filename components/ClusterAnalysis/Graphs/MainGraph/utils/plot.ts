@@ -4,23 +4,23 @@ import { select, selectAll } from 'd3-selection';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { brush, BrushBehavior } from 'd3-brush';
 
-const getMainGraphSelections = () => {
+export const getGraphSelections = (graphId = 'main') => {
     return {
-        xAxisGroup: select<SVGGElement, unknown>('#x-axis-main'),
-        yAxisGroup: select<SVGGElement, unknown>('#y-axis-main'),
-        brushGroup: select<SVGGElement, unknown>('#brush-main'),
+        xAxisGroup: select<SVGGElement, unknown>(`#x-axis-${graphId}`),
+        yAxisGroup: select<SVGGElement, unknown>(`#y-axis-${graphId}`),
+        brushGroup: select<SVGGElement, unknown>(`#brush-${graphId}`),
     };
 };
 
-const getXScale = (parentWidth: number) => {
+export const getXScale = (parentWidth: number, xDomain = [-2, 2]) => {
     const xScale = scaleLinear()
-        .domain([-2, 2])
+        .domain(xDomain)
         .range([graphMargin.left, parentWidth - graphMargin.right]);
 
     return xScale;
 };
 
-const getXAxis = (parentHeight: number, xScale: ScaleLinear<number, number, never>) => {
+export const getXAxis = (parentHeight: number, xScale: ScaleLinear<number, number, never>) => {
     const xAxis = axisBottom(xScale)
         .ticks(5)
         .tickSize(-(parentHeight - graphMargin.top - graphMargin.bottom));
@@ -28,7 +28,7 @@ const getXAxis = (parentHeight: number, xScale: ScaleLinear<number, number, neve
     return xAxis;
 };
 
-const getYAxis = (parentWidth: number, parentHeight: number) => {
+export const getYAxis = (parentWidth: number, parentHeight: number) => {
     const yScale = scaleLinear()
         .domain([2, -2])
         .range([graphMargin.top, parentHeight - graphMargin.bottom]);
@@ -77,7 +77,7 @@ export const setInitialBrush = (
 };
 
 export const plotMainGraph = (parentWidth: number, parentHeight: number) => {
-    const { xAxisGroup, yAxisGroup, brushGroup } = getMainGraphSelections();
+    const { xAxisGroup, yAxisGroup, brushGroup } = getGraphSelections();
 
     const xAxisScale = getXScale(parentWidth);
     const xAxis = getXAxis(parentHeight, xAxisScale);
