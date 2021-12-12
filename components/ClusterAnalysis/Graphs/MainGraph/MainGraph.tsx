@@ -7,8 +7,8 @@ import { graphMargin } from '../utils/shared';
 
 export const MainGraph = () => {
     const parentRef = useRef<HTMLDivElement>(null);
-    const [parentWidth, setParentWidth] = useState(100);
-    const [parentHeight, setParentHeight] = useState(100);
+    const [parentWidth, setParentWidth] = useState(0);
+    const [parentHeight, setParentHeight] = useState(0);
     const { setZoomGraphDomains } = useStore();
 
     const handleWindowResize = debounce((current: HTMLDivElement) => {
@@ -51,6 +51,7 @@ export const MainGraph = () => {
                     className="stroke-current text-chart-grid-grey font-inconsolata-regular stroke-0"
                 ></g>
                 <AxisLines parentWidth={parentWidth} parentHeight={parentHeight} />
+                <g id="points-main"></g>
                 <g id="brush-main"></g>
             </svg>
         </div>

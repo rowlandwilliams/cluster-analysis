@@ -9,6 +9,7 @@ export const getGraphSelections = (graphId = 'main') => {
         xAxisGroup: select<SVGGElement, unknown>(`#x-axis-${graphId}`),
         yAxisGroup: select<SVGGElement, unknown>(`#y-axis-${graphId}`),
         brushGroup: select<SVGGElement, unknown>(`#brush-${graphId}`),
+        pointsGroup: select<SVGGElement, unknown>(`#points-${graphId}`),
     };
 };
 

@@ -6,8 +6,8 @@ import { plotZoomGraph } from './utils/plot';
 
 export const ZoomGraph = () => {
     const parentRef = useRef<HTMLDivElement>(null);
-    const [parentWidth, setParentWidth] = useState(100);
-    const [parentHeight, setParentHeight] = useState(100);
+    const [parentWidth, setParentWidth] = useState(0);
+    const [parentHeight, setParentHeight] = useState(0);
     const { zoomGraphDomains } = useStore();
 
     const handleWindowResize = debounce((current: HTMLDivElement) => {
@@ -33,6 +33,13 @@ export const ZoomGraph = () => {
     return (
         <div className="w-full md:w-1/2 h-1/2 md:h-full" ref={parentRef}>
             <svg width="100%" height="100%">
+                <clipPath id="myClip">
+                    <rect
+                        transform={`translate(${graphMargin.left}, ${graphMargin.top})`}
+                        width={parentWidth - graphMargin.left - graphMargin.right}
+                        height={parentHeight - graphMargin.top - graphMargin.bottom}
+                    ></rect>{' '}
+                </clipPath>
                 <g
                     id="x-axis-zoom"
                     transform={`translate(0,${parentHeight - graphMargin.top})`}
@@ -43,6 +50,7 @@ export const ZoomGraph = () => {
                     transform={`translate(${graphMargin.left}, 0)`}
                     className="stroke-current text-chart-grid-grey font-inconsolata-regular stroke-0"
                 ></g>
+                <g id="points-zoom" clipPath="url(#myClip)"></g>
             </svg>
         </div>
     );

@@ -1,3 +1,4 @@
+import { useStore } from './../../../../../store/store';
 import { getXAxis, getYScale, getYAxis, getGraphSelections } from '../../utils/shared';
 import { selectAll } from 'd3-selection';
 import { getXScale } from '../../utils/shared';
@@ -7,7 +8,8 @@ export const plotZoomGraph = (
     parentHeight: number,
     zoomGraphDomains: number[][],
 ) => {
-    const { xAxisGroup, yAxisGroup } = getGraphSelections('zoom');
+    const { pointsData } = useStore.getState();
+    const { xAxisGroup, yAxisGroup, pointsGroup } = getGraphSelections('zoom');
 
     const xDomain = [zoomGraphDomains[0][0], zoomGraphDomains[1][0]];
     const yDomain = [zoomGraphDomains[0][1], zoomGraphDomains[1][1]];
@@ -22,4 +24,13 @@ export const plotZoomGraph = (
     selectAll('.tick > line, .domain').attr('stroke-width', '0.1');
 
     yAxisGroup.call(yAxis);
+
+    pointsGroup
+        .selectAll('circle')
+        .data(pointsData)
+        .join('circle')
+        .attr('cx', (d) => xAxisScale(d.x))
+        .attr('cy', (d) => yAxisScale(d.y))
+        .attr('r', 2)
+        .attr('fill', 'red');
 };

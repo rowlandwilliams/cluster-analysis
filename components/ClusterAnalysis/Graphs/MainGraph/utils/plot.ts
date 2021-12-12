@@ -1,3 +1,4 @@
+import { debounce } from 'lodash';
 import { useStore } from './../../../../../store/store';
 import { ScaleLinear } from 'd3-scale';
 import { Selection } from 'd3-selection';
@@ -40,7 +41,12 @@ export const updateZoomGraphDomains = (
     );
 
     const { setZoomGraphDomains } = useStore.getState();
-    setZoomGraphDomains(brushedDatesDomain);
+
+    const handleBrushUpdate = debounce(() => {
+        setZoomGraphDomains(brushedDatesDomain);
+    }, 50);
+
+    handleBrushUpdate();
 };
 
 export const setInitialBrush = (
@@ -59,7 +65,8 @@ export const setInitialBrush = (
 };
 
 export const plotMainGraph = (parentWidth: number, parentHeight: number) => {
-    const { xAxisGroup, yAxisGroup, brushGroup } = getGraphSelections();
+    const { pointsData } = useStore.getState();
+    const { xAxisGroup, yAxisGroup, brushGroup, pointsGroup } = getGraphSelections();
 
     const xAxisScale = getXScale(parentWidth);
     const xAxis = getXAxis(parentHeight, xAxisScale);
@@ -79,4 +86,13 @@ export const plotMainGraph = (parentWidth: number, parentHeight: number) => {
         });
 
     setInitialBrush(brushGroup, brushGenerator);
+
+    pointsGroup
+        .selectAll('circle')
+        .data(pointsData)
+        .join('circle')
+        .attr('cx', (d) => xAxisScale(d.x))
+        .attr('cy', (d) => yAxisScale(d.y))
+        .attr('r', 2)
+        .attr('fill', 'red');
 };
