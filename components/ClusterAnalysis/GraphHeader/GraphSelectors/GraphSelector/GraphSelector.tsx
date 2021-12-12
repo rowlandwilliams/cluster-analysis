@@ -10,7 +10,7 @@ export const GraphSelector = ({ isActive, selectorText }: Props) => {
     return (
         <div
             className={classNames('flex items-center px-2 py-0 rounded-sm cursor-pointer', {
-                'bg-gradient-to-t from-chart-gray to-header-purple': isActive,
+                'bg-header-purple': isActive,
                 'bg-chart-gray text-gray-500': !isActive,
             })}
         >

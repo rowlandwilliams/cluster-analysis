@@ -7,8 +7,9 @@ export const graphMargin = { top: 40, right: 40, bottom: 40, left: 40 };
 const pointPurple = '#C479FF';
 const pointRed = '#FF6868';
 const pointYellow = '#FFFA7A';
+const pointPink = '#f472b6';
 
-const pointColors = { 0: pointYellow, 1: pointRed, 2: pointPurple, 3: 'pink' };
+const pointColors = { 0: pointYellow, 1: pointRed, 2: pointPurple, 3: pointPink };
 
 export const getGraphSelections = (graphId = 'main') => {
     return {
@@ -27,9 +28,13 @@ export const getXScale = (parentWidth: number, xDomain = [-2, 2]) => {
     return xScale;
 };
 
-export const getXAxis = (parentHeight: number, xScale: ScaleLinear<number, number, never>) => {
+export const getXAxis = (
+    parentHeight: number,
+    xScale: ScaleLinear<number, number, never>,
+    isZoom = false,
+) => {
     const xAxis = axisBottom(xScale)
-        .ticks(10)
+        .ticks(isZoom ? 15 : 10)
         .tickSize(-(parentHeight - graphMargin.top - graphMargin.bottom));
 
     return xAxis;
@@ -43,9 +48,13 @@ export const getYScale = (parentHeight: number, yDomain = [2, -2]) => {
     return yScale;
 };
 
-export const getYAxis = (parentWidth: number, yScale: ScaleLinear<number, number, never>) => {
+export const getYAxis = (
+    parentWidth: number,
+    yScale: ScaleLinear<number, number, never>,
+    isZoom = false,
+) => {
     const yAxis = axisLeft(yScale)
-        .ticks(10)
+        .ticks(isZoom ? 15 : 10)
         .tickSize(-(parentWidth - graphMargin.left - graphMargin.right));
 
     return yAxis;

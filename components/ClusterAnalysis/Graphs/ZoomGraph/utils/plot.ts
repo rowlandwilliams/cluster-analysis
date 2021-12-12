@@ -16,11 +16,11 @@ export const plotZoomGraph = (
     const yDomain = [zoomGraphDomains[0][1], zoomGraphDomains[1][1]];
 
     const xAxisScale = getXScale(parentWidth, xDomain);
-    const xAxis = getXAxis(parentHeight, xAxisScale);
+    const xAxis = getXAxis(parentHeight, xAxisScale, true);
     xAxisGroup.call(xAxis);
 
     const yAxisScale = getYScale(parentHeight, yDomain);
-    const yAxis = getYAxis(parentWidth, yAxisScale);
+    const yAxis = getYAxis(parentWidth, yAxisScale, true);
 
     selectAll('.tick > line, .domain').attr('stroke-width', '0.1');
 
