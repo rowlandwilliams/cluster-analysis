@@ -1,3 +1,4 @@
+import { plotPoints } from './../../utils/shared';
 import { debounce } from 'lodash';
 import { useStore } from './../../../../../store/store';
 import { ScaleLinear } from 'd3-scale';
@@ -87,12 +88,5 @@ export const plotMainGraph = (parentWidth: number, parentHeight: number) => {
 
     setInitialBrush(brushGroup, brushGenerator);
 
-    pointsGroup
-        .selectAll('circle')
-        .data(pointsData)
-        .join('circle')
-        .attr('cx', (d) => xAxisScale(d.x))
-        .attr('cy', (d) => yAxisScale(d.y))
-        .attr('r', 2)
-        .attr('fill', 'red');
+    plotPoints(pointsGroup, pointsData, xAxisScale, yAxisScale);
 };

@@ -1,3 +1,4 @@
+import { plotPoints } from './../../utils/shared';
 import { useStore } from './../../../../../store/store';
 import { getXAxis, getYScale, getYAxis, getGraphSelections } from '../../utils/shared';
 import { selectAll } from 'd3-selection';
@@ -25,12 +26,5 @@ export const plotZoomGraph = (
 
     yAxisGroup.call(yAxis);
 
-    pointsGroup
-        .selectAll('circle')
-        .data(pointsData)
-        .join('circle')
-        .attr('cx', (d) => xAxisScale(d.x))
-        .attr('cy', (d) => yAxisScale(d.y))
-        .attr('r', 2)
-        .attr('fill', 'red');
+    plotPoints(pointsGroup, pointsData, xAxisScale, yAxisScale);
 };
