@@ -1,13 +1,14 @@
 import { debounce } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
-import { AxisLines } from '../MainGraph/AxisLines/AxisLines';
-import { graphMargin } from '../MainGraph/utils/general';
+import { useStore } from '../../../../store/store';
+import { graphMargin } from '../utils/shared';
 import { plotZoomGraph } from './utils/plot';
 
 export const ZoomGraph = () => {
     const parentRef = useRef<HTMLDivElement>(null);
     const [parentWidth, setParentWidth] = useState(100);
     const [parentHeight, setParentHeight] = useState(100);
+    const { zoomGraphDomains } = useStore();
 
     const handleWindowResize = debounce((current: HTMLDivElement) => {
         setParentWidth(current.offsetWidth);
@@ -26,8 +27,9 @@ export const ZoomGraph = () => {
     }, [handleWindowResize, parentWidth, parentHeight]);
 
     useEffect(() => {
-        plotZoomGraph(parentWidth, parentHeight);
-    }, [parentWidth, parentHeight]);
+        plotZoomGraph(parentWidth, parentHeight, zoomGraphDomains);
+    }, [parentWidth, parentHeight, zoomGraphDomains]);
+
     return (
         <div className="w-full md:w-1/2 h-1/2 md:h-full" ref={parentRef}>
             <svg width="100%" height="100%">
@@ -41,7 +43,6 @@ export const ZoomGraph = () => {
                     transform={`translate(${graphMargin.left}, 0)`}
                     className="stroke-current text-chart-grid-grey font-inconsolata-regular stroke-0"
                 ></g>
-                <AxisLines parentWidth={parentWidth} parentHeight={parentHeight} />
             </svg>
         </div>
     );

@@ -1,15 +1,15 @@
 import { debounce } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import { getZoomGraphDomainsFromContainerDims, plotMainGraph } from './utils/plot';
-import { graphMargin } from './utils/general';
 import { AxisLines } from './AxisLines/AxisLines';
 import { useStore } from '../../../../store/store';
+import { graphMargin } from '../utils/shared';
 
 export const MainGraph = () => {
     const parentRef = useRef<HTMLDivElement>(null);
     const [parentWidth, setParentWidth] = useState(100);
     const [parentHeight, setParentHeight] = useState(100);
-    const { setZoomGraphDomains, zoomGraphDomains } = useStore();
+    const { setZoomGraphDomains } = useStore();
 
     const handleWindowResize = debounce((current: HTMLDivElement) => {
         setParentWidth(current.offsetWidth);
@@ -27,14 +27,15 @@ export const MainGraph = () => {
         }
     }, [handleWindowResize, parentWidth, parentHeight]);
 
+    // set intial brush domain based on container dims
     useEffect(() => {
         const zoomGraphDomains = getZoomGraphDomainsFromContainerDims(parentWidth, parentHeight);
         setZoomGraphDomains(zoomGraphDomains);
     }, [parentHeight, parentWidth, setZoomGraphDomains]);
 
     useEffect(() => {
-        plotMainGraph(parentWidth, parentHeight, zoomGraphDomains);
-    }, [parentWidth, parentHeight, zoomGraphDomains]);
+        plotMainGraph(parentWidth, parentHeight);
+    }, [parentWidth, parentHeight]);
 
     return (
         <div className="w-full md:w-1/2 h-1/2 md:h-full" ref={parentRef}>

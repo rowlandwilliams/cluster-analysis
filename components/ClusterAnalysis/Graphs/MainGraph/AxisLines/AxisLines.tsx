@@ -1,4 +1,4 @@
-import { graphMargin } from '../utils/general';
+import { graphMargin } from '../../utils/shared';
 
 interface Props {
     parentWidth: number;
