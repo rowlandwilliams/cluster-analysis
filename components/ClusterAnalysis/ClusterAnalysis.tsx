@@ -3,7 +3,7 @@ import { Graphs } from './Graphs/Graphs';
 
 export const ClusterAnalysis = () => {
     return (
-        <div className="bg-chart-gray text-white rounded-md" style={{ width: 900 }}>
+        <div className="h-full bg-chart-gray text-white rounded-md flex flex-col">
             <GraphHeader />
             <Graphs />
         </div>

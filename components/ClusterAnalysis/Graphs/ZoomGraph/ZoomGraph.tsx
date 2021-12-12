@@ -29,7 +29,7 @@ export const ZoomGraph = () => {
         plotZoomGraph(parentWidth, parentHeight);
     }, [parentWidth, parentHeight]);
     return (
-        <div className="w-1/2" ref={parentRef}>
+        <div className="w-full md:w-1/2 h-1/2 md:h-full" ref={parentRef}>
             <svg width="100%" height="100%">
                 <g
                     id="x-axis-zoom"

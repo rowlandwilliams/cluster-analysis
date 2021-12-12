@@ -1,11 +1,14 @@
 import create from 'zustand';
 
 interface AppState {
-    sampleState: string;
-    setSampleState: (sampleState: string) => void;
+    zoomGraphDomains: number[][];
+    setZoomGraphDomains: (zoomGraohDomains: number[][]) => void;
 }
 
 export const useStore = create<AppState>((set) => ({
-    sampleState: 'suh',
-    setSampleState: (sampleState: string) => set({ sampleState }),
+    zoomGraphDomains: [
+        [0, 0],
+        [0, 0],
+    ],
+    setZoomGraphDomains: (zoomGraphDomains: number[][]) => set({ zoomGraphDomains }),
 }));

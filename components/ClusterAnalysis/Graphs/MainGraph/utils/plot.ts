@@ -40,43 +40,54 @@ export const getYAxis = (parentWidth: number, parentHeight: number) => {
     return yAxis;
 };
 
-export const updateBottomAreaWhileBrushing = (
-    event: { selection: number[] },
+export const getZoomGraphDomainsFromContainerDims = (parentWidth: number, parentHeight: number) => {
+    return [
+        [graphMargin.left, graphMargin.top],
+        [
+            graphMargin.left + (parentWidth - graphMargin.left - graphMargin.right) / 2,
+            graphMargin.top + (parentHeight - graphMargin.bottom - graphMargin.top) / 2,
+        ],
+    ];
+};
+
+export const updateZoomGraphDomains = (
+    event: { selection: number[][] },
     xBottom: ScaleLinear<number, number, never>,
 ) => {
     const selection = { event };
-    console.log(selection);
     const extent = selection.event.selection;
+
     if (!extent) return;
-    const brushedDatesDomain = extent.map((x: number) => xBottom.invert(x));
-    console.log(extent, brushedDatesDomain);
-    // clipBottomChartAreaToBrush(xBottom, brushedDatesDomain);
+
+    const brushedDatesDomain = extent.map((extentValueArr: number[]) =>
+        extentValueArr.map((extentValue) => xBottom.invert(extentValue)),
+    );
+
+    console.log(brushedDatesDomain);
 };
 
 export const setInitialBrush = (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    brushGroup: Selection<SVGGElement, unknown, HTMLElement, any>,
+    brushGroup: Selection<SVGGElement, unknown, HTMLElement, never>,
     brushGenerator: BrushBehavior<unknown>,
     parentWidth: number,
     parentHeight: number,
+    brushDomain: number[][],
 ) => {
     // call brush function and set initial position / position on time label click
     brushGroup
         .call(brushGenerator)
         .transition()
-        .call(brushGenerator.move, [
-            [graphMargin.left, graphMargin.top],
-            [
-                graphMargin.left + (parentWidth - graphMargin.left - graphMargin.right) / 2,
-                graphMargin.top + (parentHeight - graphMargin.bottom - graphMargin.top) / 2,
-            ],
-        ])
+        .call(brushGenerator.move, brushDomain)
         .select('.selection') // color brush
         .attr('fill', brushGreen)
         .attr('stroke', brushGreen);
 };
 
-export const plotMainGraph = (parentWidth: number, parentHeight: number) => {
+export const plotMainGraph = (
+    parentWidth: number,
+    parentHeight: number,
+    brushDomain: number[][],
+) => {
     const { xAxisGroup, yAxisGroup, brushGroup } = getGraphSelections();
 
     const xAxisScale = getXScale(parentWidth);
@@ -88,10 +99,14 @@ export const plotMainGraph = (parentWidth: number, parentHeight: number) => {
 
     selectAll('.tick > line, .domain').attr('stroke-width', '0.1');
 
-    const brushGenerator = brush().extent([
-        [graphMargin.left, graphMargin.top],
-        [parentWidth - graphMargin.right, parentHeight - graphMargin.bottom],
-    ]);
+    const brushGenerator = brush()
+        .extent([
+            [graphMargin.left, graphMargin.top],
+            [parentWidth - graphMargin.right, parentHeight - graphMargin.bottom],
+        ])
+        .on('brush', (event) => {
+            updateZoomGraphDomains(event, xAxisScale);
+        });
 
-    setInitialBrush(brushGroup, brushGenerator, parentWidth, parentHeight);
+    setInitialBrush(brushGroup, brushGenerator, parentWidth, parentHeight, brushDomain);
 };
