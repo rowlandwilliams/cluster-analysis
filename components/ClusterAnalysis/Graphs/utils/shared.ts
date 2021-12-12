@@ -4,7 +4,11 @@ import { axisBottom, axisLeft } from 'd3-axis';
 import { select, Selection } from 'd3-selection';
 
 export const graphMargin = { top: 40, right: 40, bottom: 40, left: 40 };
-const pointColors = { 0: 'yellow', 1: 'red', 2: 'blue', 3: 'pink' };
+const pointPurple = '#C479FF';
+const pointRed = '#FF6868';
+const pointYellow = '#FFFA7A';
+
+const pointColors = { 0: pointYellow, 1: pointRed, 2: pointPurple, 3: 'pink' };
 
 export const getGraphSelections = (graphId = 'main') => {
     return {
@@ -59,6 +63,6 @@ export const plotPoints = (
         .join('circle')
         .attr('cx', (d) => xScale(d.x))
         .attr('cy', (d) => yScale(d.y))
-        .attr('r', 2)
+        .attr('r', 3)
         .attr('fill', (d) => pointColors[d.group]);
 };

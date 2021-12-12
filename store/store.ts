@@ -8,7 +8,7 @@ interface AppState {
     pointsData: Point[];
 }
 
-const points = [...Array(1000)].map(() => ({
+const points = [...Array(300)].map(() => ({
     x: Math.random() < 0.5 ? Math.random() * 2 : -Math.random() * 2,
     y: Math.random() < 0.5 ? Math.random() * 2 : -Math.random() * 2,
     group: Math.floor(Math.random() * 4),
