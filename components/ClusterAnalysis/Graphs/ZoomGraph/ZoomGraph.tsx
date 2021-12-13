@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { debounce } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../../../../store/store';
@@ -8,6 +9,8 @@ export const ZoomGraph = () => {
     const parentRef = useRef<HTMLDivElement>(null);
     const [parentWidth, setParentWidth] = useState(0);
     const [parentHeight, setParentHeight] = useState(0);
+    const isLoading = parentWidth === 0;
+
     const { zoomGraphDomains } = useStore();
 
     const handleWindowResize = debounce((current: HTMLDivElement) => {
@@ -31,7 +34,16 @@ export const ZoomGraph = () => {
     }, [parentWidth, parentHeight, zoomGraphDomains]);
 
     return (
-        <div className="w-full md:w-1/2 h-1/2 md:h-full" ref={parentRef}>
+        <div
+            className={classNames(
+                'w-full md:w-1/2 h-1/2 md:h-full transition-opacity duration-200',
+                {
+                    'opacity-0': isLoading,
+                    'opacity-100': !isLoading,
+                },
+            )}
+            ref={parentRef}
+        >
             <svg width="100%" height="100%">
                 <clipPath id="myClip">
                     <rect

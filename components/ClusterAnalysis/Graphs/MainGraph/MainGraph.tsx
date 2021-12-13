@@ -4,11 +4,14 @@ import { getZoomGraphDomainsFromContainerDims, plotMainGraph } from './utils/plo
 import { AxisLines } from './AxisLines/AxisLines';
 import { useStore } from '../../../../store/store';
 import { graphMargin } from '../utils/shared';
+import classNames from 'classnames';
 
 export const MainGraph = () => {
     const parentRef = useRef<HTMLDivElement>(null);
     const [parentWidth, setParentWidth] = useState(0);
     const [parentHeight, setParentHeight] = useState(0);
+    const isLoading = parentWidth === 0;
+
     const { setZoomGraphDomains } = useStore();
 
     const handleWindowResize = debounce((current: HTMLDivElement) => {
@@ -38,7 +41,16 @@ export const MainGraph = () => {
     }, [parentWidth, parentHeight]);
 
     return (
-        <div className="w-full md:w-1/2 h-1/2 md:h-full" ref={parentRef}>
+        <div
+            className={classNames(
+                'w-full md:w-1/2 h-1/2 md:h-full transition-opacity duration-200',
+                {
+                    'opacity-0': isLoading,
+                    'opacity-100': !isLoading,
+                },
+            )}
+            ref={parentRef}
+        >
             <svg width="100%" height="100%">
                 <g
                     id="x-axis-main"
