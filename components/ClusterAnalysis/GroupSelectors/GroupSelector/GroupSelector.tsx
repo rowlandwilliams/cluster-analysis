@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { selectAll } from 'd3-selection';
 import { useState } from 'react';
 
 interface Props {
@@ -6,10 +7,18 @@ interface Props {
     borderClass: string;
     textClass: string;
     bgClass: string;
+    groupIndex: number;
 }
 
-export const GroupSelector = ({ group, borderClass, textClass, bgClass }: Props) => {
+export const GroupSelector = ({ group, borderClass, textClass, bgClass, groupIndex }: Props) => {
     const [isActive, setIsActive] = useState(true);
+
+    const handleSelectorClick = () => {
+        const groupClass = '.group-' + groupIndex;
+
+        setIsActive(!isActive);
+        selectAll(groupClass).attr('opacity', isActive ? 0 : 1);
+    };
 
     return (
         <div
@@ -21,7 +30,7 @@ export const GroupSelector = ({ group, borderClass, textClass, bgClass }: Props)
                     'border border-gray-400': !isActive,
                 },
             )}
-            onClick={() => setIsActive(!isActive)}
+            onClick={() => handleSelectorClick()}
         >
             <div
                 className={classNames(

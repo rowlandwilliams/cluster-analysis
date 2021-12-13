@@ -70,6 +70,7 @@ export const plotPoints = (
         .selectAll('circle')
         .data(pointsData)
         .join('circle')
+        .attr('class', (d) => 'group-' + d.group)
         .attr('cx', (d) => xScale(d.x))
         .attr('cy', (d) => yScale(d.y))
         .attr('r', 3)
