@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { VisualisationContainer } from '../components/VisualisationContainer/VisualisationContainer';
+import { VisualisationContainer } from '../components/VisualisationContainer';
 
 const Home: NextPage = () => {
     return (

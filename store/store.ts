@@ -1,6 +1,6 @@
 import create from 'zustand';
+import { graphMargin } from '../components/Scatterplots/utils/shared';
 import { Point } from './../types/types';
-import { graphMargin } from '../components/VisualisationContainer/Scatterplots/utils/shared';
 
 interface AppState {
     zoomGraphDomains: number[][];

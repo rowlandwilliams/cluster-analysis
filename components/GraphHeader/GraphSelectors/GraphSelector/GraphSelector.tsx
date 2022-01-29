@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useStore } from '../../../../../store/store';
+import { useStore } from '../../../../store/store';
 import { TrifectorIcon } from './TrifectorIcon/TrifectorIcon';
 
 interface Props {

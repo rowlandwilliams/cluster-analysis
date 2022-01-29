@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { debounce } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
-import { useStore } from '../../../../store/store';
+import { useStore } from '../../../store/store';
 import { graphMargin } from '../utils/shared';
 import { plotZoomGraph } from './utils/plot';
 

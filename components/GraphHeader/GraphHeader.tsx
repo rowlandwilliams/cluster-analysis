@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import AppIcon from '../../../assets/app-icon.svg';
+import AppIcon from '../../assets/app-icon.svg';
 import { GraphSelectors } from './GraphSelectors/GraphSelectors';
 
 export const GraphHeader = () => {

@@ -1,6 +1,6 @@
 import { selectAll } from 'd3-selection';
 import { plotPoints } from '../../utils/shared';
-import { useStore } from '../../../../../store/store';
+import { useStore } from '../../../../store/store';
 import { getXAxis, getYScale, getYAxis, getGraphSelections } from '../../utils/shared';
 import { getXScale } from '../../utils/shared';
 

@@ -1,6 +1,6 @@
 import { GraphHeader } from './GraphHeader/GraphHeader';
 import { ClusterAnalysis } from './ClusterAnalysis/ClusterAnalysis';
-import { useStore } from '../../store/store';
+import { useStore } from '../store/store';
 
 export const VisualisationContainer = () => {
     const { activeSelector } = useStore();
