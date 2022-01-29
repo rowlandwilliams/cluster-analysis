@@ -1,10 +1,10 @@
+import classNames from 'classnames';
 import { debounce } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import { getZoomGraphDomainsFromContainerDims, plotMainGraph } from './utils/plot';
 import { AxisLines } from './AxisLines/AxisLines';
 import { useStore } from '../../../../store/store';
 import { graphMargin } from '../utils/shared';
-import classNames from 'classnames';
 
 export const MainGraph = () => {
     const parentRef = useRef<HTMLDivElement>(null);

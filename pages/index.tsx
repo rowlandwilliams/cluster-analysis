@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { ClusterAnalysis } from '../components/ClusterAnalysis/ClusterAnalysis';
+import { VisualisationContainer } from '../components/VisualisationContainer/VisualisationContainer';
 
 const Home: NextPage = () => {
     return (
@@ -10,7 +10,7 @@ const Home: NextPage = () => {
                 <meta name="description" content="Cluster" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <ClusterAnalysis />
+            <VisualisationContainer />
         </div>
     );
 };

@@ -1,6 +1,4 @@
-import { plotPoints } from './../../utils/shared';
 import { debounce } from 'lodash';
-import { useStore } from './../../../../../store/store';
 import { ScaleLinear } from 'd3-scale';
 import { Selection } from 'd3-selection';
 import { brush, BrushBehavior } from 'd3-brush';
@@ -12,6 +10,8 @@ import {
     graphMargin,
     getGraphSelections,
 } from '../../utils/shared';
+import { useStore } from '../../../../../store/store';
+import { plotPoints } from '../../utils/shared';
 
 export const brushGreen = '#9FFF8F';
 
