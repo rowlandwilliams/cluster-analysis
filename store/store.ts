@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { graphMargin } from '../components/Scatterplots/utils/shared';
+import { graphMargin } from '../components/ClusterAnalysis/Scatterplots/utils/shared';
 import { Point } from './../types/types';
 
 interface AppState {

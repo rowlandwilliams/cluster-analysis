@@ -1,7 +1,7 @@
 import { ScaleLinear, scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { select, Selection } from 'd3-selection';
-import { Point } from '../../../types/types';
+import { Point } from '../../../../types/types';
 
 export const graphMargin = { top: 40, right: 40, bottom: 40, left: 40 };
 const pointPurple = '#C479FF';

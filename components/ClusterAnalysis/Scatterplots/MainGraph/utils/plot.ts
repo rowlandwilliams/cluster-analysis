@@ -10,7 +10,7 @@ import {
     graphMargin,
     getGraphSelections,
 } from '../../utils/shared';
-import { useStore } from '../../../../store/store';
+import { useStore } from '../../../../../store/store';
 import { plotPoints } from '../../utils/shared';
 
 export const brushGreen = '#9FFF8F';

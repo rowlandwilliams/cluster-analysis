@@ -1,6 +1,6 @@
 import React from 'react';
-import { GroupSelectors } from '../GroupSelectors/GroupSelectors';
-import { Scatterplots } from '../Scatterplots/Scatterplots';
+import { GroupSelectors } from './GroupSelectors/GroupSelectors';
+import { Scatterplots } from './Scatterplots/Scatterplots';
 
 export const ClusterAnalysis = () => {
     return (
