@@ -1,7 +1,8 @@
 import { NextPage } from 'next';
+import { LineGraph } from '../components/LineGraph/LineGraph';
 
-const LineGraph: NextPage = () => {
-    return <div>suh</div>;
+const LineGraphPage: NextPage = () => {
+    return <LineGraph />;
 };
 
-export default LineGraph;
+export default LineGraphPage;

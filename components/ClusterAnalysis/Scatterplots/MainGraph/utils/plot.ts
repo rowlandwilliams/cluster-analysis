@@ -2,16 +2,9 @@ import { debounce } from 'lodash';
 import { ScaleLinear } from 'd3-scale';
 import { Selection } from 'd3-selection';
 import { brush, BrushBehavior } from 'd3-brush';
-import {
-    getXScale,
-    getXAxis,
-    getYAxis,
-    getYScale,
-    graphMargin,
-    getGraphSelections,
-} from '../../utils/shared';
 import { useStore } from '../../../../../store/store';
-import { plotPoints } from '../../utils/shared';
+import { getClusterXAxis, getClusterYAxis, plotPoints } from '../../utils/shared';
+import { getGraphSelections, getXScale, getYScale, graphMargin } from '../../../../utils/plot';
 
 export const brushGreen = '#9FFF8F';
 
@@ -70,11 +63,11 @@ export const plotMainGraph = (parentWidth: number, parentHeight: number) => {
     const { xAxisGroup, yAxisGroup, brushGroup, pointsGroup } = getGraphSelections();
 
     const xAxisScale = getXScale(parentWidth);
-    const xAxis = getXAxis(parentHeight, xAxisScale);
+    const xAxis = getClusterXAxis(parentHeight, xAxisScale);
     xAxisGroup.call(xAxis);
 
     const yAxisScale = getYScale(parentHeight);
-    const yAxis = getYAxis(parentWidth, yAxisScale);
+    const yAxis = getClusterYAxis(parentWidth, yAxisScale);
     yAxisGroup.call(yAxis);
 
     const brushGenerator = brush()

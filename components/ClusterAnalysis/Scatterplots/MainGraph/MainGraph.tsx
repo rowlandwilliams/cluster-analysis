@@ -3,8 +3,8 @@ import { debounce } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import { getZoomGraphDomainsFromContainerDims, plotMainGraph } from './utils/plot';
 import { AxisLines } from './AxisLines/AxisLines';
+import { graphMargin } from '../../../utils/plot';
 import { useStore } from '../../../../store/store';
-import { graphMargin } from '../utils/shared';
 
 export const MainGraph = () => {
     const parentRef = useRef<HTMLDivElement>(null);

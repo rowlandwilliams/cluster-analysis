@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { debounce } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../../../../store/store';
-import { graphMargin } from '../utils/shared';
+import { graphMargin } from '../../../utils/plot';
 import { plotZoomGraph } from './utils/plot';
 
 export const ZoomGraph = () => {
