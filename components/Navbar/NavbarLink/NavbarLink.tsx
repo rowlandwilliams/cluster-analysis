@@ -4,14 +4,23 @@ import React from 'react';
 
 interface Props {
     href: string;
-    imgSrc: string;
+    activeImgSrc: string;
+    inactiveImgSrc: string;
+    pathname: string;
 }
 
-export const NavbarLink = ({ href, imgSrc }: Props) => {
+export const NavbarLink = ({ href, activeImgSrc, inactiveImgSrc, pathname }: Props) => {
+    const linkDestination = `/${href}`;
+    const isActive = linkDestination === pathname;
     return (
-        <Link href={`/${href}`} passHref>
-            <div className="flex justify-center items-center mx-1 pb-2 pt-4 border-b border-gray-600">
-                <Image src={imgSrc} alt="app-icon" width={40} height={40} />
+        <Link href={linkDestination} passHref>
+            <div className="flex justify-center items-center p-3 mx-2 border-b border-gray-600">
+                <Image
+                    src={isActive ? activeImgSrc : inactiveImgSrc}
+                    alt="app-icon"
+                    width={40}
+                    height={40}
+                />
             </div>
         </Link>
     );
