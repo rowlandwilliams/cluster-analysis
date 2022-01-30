@@ -1,9 +1,8 @@
 import { selectAll } from 'd3-selection';
-import { plotPoints } from '../../utils/shared';
+import { getClusterYAxis } from './../../utils/shared';
+import { getClusterXAxis, plotPoints } from '../../utils/shared';
 import { useStore } from '../../../../../store/store';
-import { getXAxis, getYScale, getYAxis } from '../../utils/shared';
-import { getXScale } from '../../utils/shared';
-import { getGraphSelections } from '../../../../utils/plot';
+import { getGraphSelections, getXScale, getYScale } from '../../../../utils/plot';
 
 export const plotZoomGraph = (
     parentWidth: number,
@@ -17,11 +16,11 @@ export const plotZoomGraph = (
     const yDomain = [zoomGraphDomains[0][1], zoomGraphDomains[1][1]];
 
     const xAxisScale = getXScale(parentWidth, xDomain);
-    const xAxis = getXAxis(parentHeight, xAxisScale, true);
+    const xAxis = getClusterXAxis(parentHeight, xAxisScale, true);
     xAxisGroup.call(xAxis);
 
     const yAxisScale = getYScale(parentHeight, yDomain);
-    const yAxis = getYAxis(parentWidth, yAxisScale, true);
+    const yAxis = getClusterYAxis(parentWidth, yAxisScale, true);
 
     selectAll('.tick > line, .domain').attr('stroke-width', '0.1');
 
