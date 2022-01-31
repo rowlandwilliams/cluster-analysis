@@ -3,3 +3,8 @@ export interface Point {
     y: number;
     group: number;
 }
+
+export interface LineGraphPair {
+    year: number;
+    yValue: number;
+}

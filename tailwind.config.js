@@ -8,6 +8,7 @@ module.exports = {
             fontSize: { '2xs': '0.625rem' },
             fontFamily: {
                 'inconsolata-regular': ['Inconsolata-Regular'],
+                'inter-regular': ['Inter-Regular'],
             },
             colors: {
                 'chart-gray': '#1D2025',
