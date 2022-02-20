@@ -1,5 +1,5 @@
 import { debounce } from 'lodash';
-import { ScaleLinear } from 'd3-scale';
+import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { Selection } from 'd3-selection';
 import { brush, BrushBehavior } from 'd3-brush';
 import { useStore } from '../../../../../store/store';
@@ -20,7 +20,7 @@ export const getZoomGraphDomainsFromContainerDims = (parentWidth: number, parent
 
 export const updateZoomGraphDomains = (
     event: { selection: number[][] },
-    xScale: ScaleLinear<number, number, never>,
+    xScale: ScaleTime<number, number, never> | ScaleLinear<number, number, never>,
     yScale: ScaleLinear<number, number, never>,
 ) => {
     const selection = { event };

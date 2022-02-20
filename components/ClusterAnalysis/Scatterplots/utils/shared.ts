@@ -1,4 +1,4 @@
-import { ScaleLinear,  } from 'd3-scale';
+import { ScaleLinear, ScaleTime,  } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { Selection } from 'd3-selection';
 import { Point } from '../../../../types/types';
@@ -13,7 +13,7 @@ const pointColors = { 0: pointYellow, 1: pointRed, 2: pointPurple, 3: pointPink 
 
 export const getClusterXAxis = (
     parentHeight: number,
-    xScale: ScaleLinear<number, number, never>,
+    xScale: ScaleTime<number, number, never> | ScaleLinear<number, number, never>,
     isZoom = false,
 ) => {
     const xAxis = axisBottom(xScale)
@@ -38,7 +38,7 @@ export const getClusterYAxis = (
 export const plotPoints = (
     pointsGroup: Selection<SVGGElement, unknown, HTMLElement, unknown>,
     pointsData: Point[],
-    xScale: ScaleLinear<number, number, never>,
+    xScale: ScaleTime<number, number, never> | ScaleLinear<number, number, never>,
     yScale: ScaleLinear<number, number, never>,
 ) => {
     return pointsGroup
