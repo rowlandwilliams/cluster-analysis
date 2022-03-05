@@ -3,21 +3,22 @@ import { axisBottom, axisLeft } from 'd3-axis';
 import { select } from 'd3-selection';
 import { debounce } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
-import { LineGraphPair } from '../../types/types';
-import { getGraphSelections, getXScale, getYScale, graphMargin } from '../utils/plot';
+import { getGraphSelections, getXScale, getYScale } from '../utils/plot';
+import { AreaGradient } from './AreaGradient/AreaGradient';
+import { axisFontSize } from './Axes/utils';
+import { XAxis } from './Axes/XAxis/XAxis';
+import { YAxis } from './Axes/YAxis/YAxis';
+import { Area } from './Shapes/Area/Area';
+import { Line } from './Shapes/Line/Line';
 import {
     endYear,
     getAreaGenerator,
     getLineGenerator,
-    getLineGraphData,
+    lineGraphData,
     startYear,
     yMax,
     yMin,
 } from './utils/utils';
-
-const areaPurple = '#7263F1';
-const lineGraphData: LineGraphPair[] = getLineGraphData();
-const axisTextClass = 'fill-current text-gray-400 text-xs font-inter-regular text-base';
 
 export const LineGraph = () => {
     const parentRef = useRef<HTMLDivElement>(null);
@@ -56,7 +57,7 @@ export const LineGraph = () => {
             xAxisGroup
                 .call(xAxis)
                 .call(() => select('.domain').remove())
-                .style('font-size', '0.75rem')
+                .style('font-size', axisFontSize)
                 .selectAll('text')
                 .attr('transform', 'rotate(-45)')
                 .style('text-anchor', 'end');
@@ -66,8 +67,9 @@ export const LineGraph = () => {
             yAxisGroup
                 .call(yAxis)
                 .call(() => select('.domain').remove())
-                .style('font-size', '0.75rem');
+                .style('font-size', axisFontSize);
         };
+
         plotLineGraph();
     }, [parentWidth, parentHeight, yScale, xScale]);
 
@@ -84,35 +86,13 @@ export const LineGraph = () => {
         >
             <svg width="100%" height="100%">
                 <defs>
-                    <linearGradient id="area-gradient" gradientTransform="rotate(90)">
-                        <stop offset="0%" stopColor={areaPurple} />
-                        <stop offset="75%" stopColor="white" />
-                    </linearGradient>
+                    <AreaGradient />
                 </defs>
                 <g>
-                    <g
-                        id="x-axis-line-graph"
-                        transform={`translate(0, ${parentHeight - graphMargin.bottom})`}
-                        className={axisTextClass}
-                    />
-                    <g
-                        id="y-axis-line-graph"
-                        transform={`translate(${graphMargin.left}, 0)`}
-                        className={axisTextClass}
-                    />
-                    <path
-                        id="line-line-graph"
-                        d={lineGenerator(lineGraphData) as string}
-                        fill="none"
-                        stroke={areaPurple}
-                        className="stroke-2"
-                    />
-                    <path
-                        id="area-line-graph"
-                        d={areaGenerator(lineGraphData) as string}
-                        fill="url(#area-gradient)"
-                        className="opacity-40"
-                    />
+                    <XAxis parentHeight={parentHeight} />
+                    <YAxis />
+                    <Line lineGenerator={lineGenerator} />
+                    <Area areaGenerator={areaGenerator} />
                 </g>
             </svg>
         </section>

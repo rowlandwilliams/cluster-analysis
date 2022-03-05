@@ -3,15 +3,17 @@ import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { area, curveNatural, line } from 'd3-shape';
 import { LineGraphPair } from '../../../types/types';
 
+export const areaPurple = '#7263F1';
+
+const nYears = 80;
+const today = new Date();
+export const startYear = today.getFullYear() - nYears;
+export const endYear = startYear + nYears;
 export const yMin = 0;
 export const yMax = 20;
 const offset = 5;
 
-const nYears = 50;
-export const startYear = 1972;
-export const endYear = startYear + nYears;
-
-export const getLineGraphData = () => {
+const getLineGraphData = () => {
     const random = randomUniform(yMin + offset, yMax - offset);
     const lineGraphData = [...Array(nYears + 1)].map((x, i) => ({
         year: startYear + i,
@@ -20,6 +22,8 @@ export const getLineGraphData = () => {
 
     return lineGraphData;
 };
+
+export const lineGraphData: LineGraphPair[] = getLineGraphData();
 
 export const getLineGenerator = (
     xScale: ScaleTime<number, number, never> | ScaleLinear<number, number, never>,
