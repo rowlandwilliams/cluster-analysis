@@ -37,7 +37,7 @@ export const updateZoomGraphDomains = (
     const { setZoomGraphDomains } = useStore.getState();
 
     const handleBrushUpdate = debounce(() => {
-        setZoomGraphDomains(brushedDatesDomain);
+        setZoomGraphDomains(brushedDatesDomain as number[][]);
     }, 50);
 
     handleBrushUpdate();
