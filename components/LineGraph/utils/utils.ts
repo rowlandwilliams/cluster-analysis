@@ -5,10 +5,10 @@ import { LineGraphPair } from '../../../types/types';
 
 export const yMin = 0;
 export const yMax = 20;
-const offset = 3;
+const offset = 5;
 
-const nYears = 10;
-export const startYear = 2010;
+const nYears = 50;
+export const startYear = 1972;
 export const endYear = startYear + nYears;
 
 export const getLineGraphData = () => {

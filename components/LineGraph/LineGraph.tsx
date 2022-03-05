@@ -15,8 +15,9 @@ import {
     yMin,
 } from './utils/utils';
 
+const areaPurple = '#7263F1';
 const lineGraphData: LineGraphPair[] = getLineGraphData();
-const axisTextClass = 'fill-current text-gray-400 font-inter-regular text-base';
+const axisTextClass = 'fill-current text-gray-400 text-xs font-inter-regular text-base';
 
 export const LineGraph = () => {
     const parentRef = useRef<HTMLDivElement>(null);
@@ -52,11 +53,20 @@ export const LineGraph = () => {
                 .ticks(endYear - startYear)
                 .tickFormat((d, i) => String(lineGraphData[i].year));
 
-            xAxisGroup.call(xAxis).call(() => select('.domain').remove());
+            xAxisGroup
+                .call(xAxis)
+                .call(() => select('.domain').remove())
+                .style('font-size', '0.75rem')
+                .selectAll('text')
+                .attr('transform', 'rotate(-45)')
+                .style('text-anchor', 'end');
 
             const yAxis = axisLeft(yScale).tickSize(0);
 
-            yAxisGroup.call(yAxis).call(() => select('.domain').remove());
+            yAxisGroup
+                .call(yAxis)
+                .call(() => select('.domain').remove())
+                .style('font-size', '0.75rem');
         };
         plotLineGraph();
     }, [parentWidth, parentHeight, yScale, xScale]);
@@ -73,7 +83,13 @@ export const LineGraph = () => {
             ref={parentRef}
         >
             <svg width="100%" height="100%">
-                <g className="font-inconsolata-regular text-lg">
+                <defs>
+                    <linearGradient id="area-gradient" gradientTransform="rotate(90)">
+                        <stop offset="0%" stopColor={areaPurple} />
+                        <stop offset="75%" stopColor="white" />
+                    </linearGradient>
+                </defs>
+                <g>
                     <g
                         id="x-axis-line-graph"
                         transform={`translate(0, ${parentHeight - graphMargin.bottom})`}
@@ -88,13 +104,14 @@ export const LineGraph = () => {
                         id="line-line-graph"
                         d={lineGenerator(lineGraphData) as string}
                         fill="none"
-                        className="stroke-2 stroke-current text-gray-600"
+                        stroke={areaPurple}
+                        className="stroke-2"
                     />
                     <path
                         id="area-line-graph"
                         d={areaGenerator(lineGraphData) as string}
-                        fill="#7263F1"
-                        className="stroke-2 stroke-current text-indigo-500 opacity-50"
+                        fill="url(#area-gradient)"
+                        className="opacity-40"
                     />
                 </g>
             </svg>

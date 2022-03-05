@@ -1,6 +1,8 @@
 import { scaleLinear, scaleTime } from 'd3-scale';
 import { select } from 'd3-selection';
 
+const axisPadding = 10;
+
 export const graphMargin = { top: 80, right: 80, bottom: 80, left: 80 };
 
 export const getGraphSelections = (graphId = 'main') => {
@@ -17,7 +19,7 @@ export const getXScale = (parentWidth: number, xDomain = [-2, 2], isTime = false
     return isTime
         ? scaleTime()
               .domain(xDomain)
-              .range([graphMargin.left * 2, parentWidth - graphMargin.right])
+              .range([graphMargin.left + axisPadding, parentWidth - graphMargin.right])
         : scaleLinear()
               .domain(xDomain)
               .range([graphMargin.left, parentWidth - graphMargin.right]);
@@ -26,7 +28,7 @@ export const getXScale = (parentWidth: number, xDomain = [-2, 2], isTime = false
 export const getYScale = (parentHeight: number, yDomain = [2, -2]) => {
     const yScale = scaleLinear()
         .domain(yDomain)
-        .range([graphMargin.top, parentHeight - graphMargin.bottom]);
+        .range([graphMargin.top, parentHeight - graphMargin.bottom - axisPadding]);
 
     return yScale;
 };
