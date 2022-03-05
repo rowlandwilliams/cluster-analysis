@@ -3,8 +3,8 @@ import { graphMargin } from '../components/utils/plot';
 import { Point } from './../types/types';
 
 interface AppState {
-    zoomGraphDomains: (number | Date)[][];
-    setZoomGraphDomains: (zoomGraphDomains: (number | Date)[][]) => void;
+    zoomGraphDomains: number[][];
+    setZoomGraphDomains: (zoomGraphDomains: number[][]) => void;
     pointsData: Point[];
     activeSelector: string;
     setActiveSelector: (selectorText: string) => void;
@@ -21,7 +21,7 @@ export const useStore = create<AppState>((set) => ({
         [graphMargin.left, graphMargin.top],
         [graphMargin.left + 100, graphMargin.top + 100],
     ],
-    setZoomGraphDomains: (zoomGraphDomains: (number | Date)[][]) => set({ zoomGraphDomains }),
+    setZoomGraphDomains: (zoomGraphDomains: number[][]) => set({ zoomGraphDomains }),
     pointsData: points,
     activeSelector: 'PCA',
     setActiveSelector: (activeSelector: string) => set({ activeSelector }),
