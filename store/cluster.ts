@@ -1,6 +1,6 @@
 import create from 'zustand';
 import { graphMargin } from '../components/utils/plot';
-import { Point } from './../types/types';
+import { Point } from '../types/types';
 
 interface AppState {
     zoomGraphDomains: number[][];
@@ -16,7 +16,7 @@ const points = [...Array(300)].map(() => ({
     group: Math.floor(Math.random() * 4),
 }));
 
-export const useStore = create<AppState>((set) => ({
+export const clusterStore = create<AppState>((set) => ({
     zoomGraphDomains: [
         [graphMargin.left, graphMargin.top],
         [graphMargin.left + 100, graphMargin.top + 100],

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { debounce } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
-import { useStore } from '../../../../store/store';
+import { clusterStore } from '../../../../store/cluster';
 import { graphMargin } from '../../../utils/plot';
 import { plotZoomGraph } from './utils/plot';
 
@@ -11,7 +11,7 @@ export const ZoomGraph = () => {
     const [parentHeight, setParentHeight] = useState(0);
     const isLoading = parentWidth === 0;
 
-    const { zoomGraphDomains } = useStore();
+    const { zoomGraphDomains } = clusterStore();
 
     const handleWindowResize = debounce((current: HTMLDivElement) => {
         setParentWidth(current.offsetWidth);
@@ -55,12 +55,12 @@ export const ZoomGraph = () => {
                 <g
                     id="x-axis-zoom"
                     transform={`translate(0,${parentHeight - graphMargin.top})`}
-                    className="stroke-current text-chart-grid-grey font-inconsolata-regular stroke-0"
+                    className="stroke-current stroke-0 text-chart-grid-grey font-inconsolata-regular"
                 ></g>
                 <g
                     id="y-axis-zoom"
                     transform={`translate(${graphMargin.left}, 0)`}
-                    className="stroke-current text-chart-grid-grey font-inconsolata-regular stroke-0"
+                    className="stroke-current stroke-0 text-chart-grid-grey font-inconsolata-regular"
                 ></g>
                 <g id="points-zoom" clipPath="url(#myClip)"></g>
             </svg>

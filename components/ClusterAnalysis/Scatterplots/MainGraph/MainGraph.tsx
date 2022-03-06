@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { getZoomGraphDomainsFromContainerDims, plotMainGraph } from './utils/plot';
 import { AxisLines } from './AxisLines/AxisLines';
 import { graphMargin } from '../../../utils/plot';
-import { useStore } from '../../../../store/store';
+import { clusterStore } from '../../../../store/cluster';
 
 export const MainGraph = () => {
     const parentRef = useRef<HTMLDivElement>(null);
@@ -12,7 +12,7 @@ export const MainGraph = () => {
     const [parentHeight, setParentHeight] = useState(0);
     const isLoading = parentWidth === 0;
 
-    const { setZoomGraphDomains } = useStore();
+    const { setZoomGraphDomains } = clusterStore();
 
     const handleWindowResize = debounce((current: HTMLDivElement) => {
         setParentWidth(current.offsetWidth);
@@ -55,12 +55,12 @@ export const MainGraph = () => {
                 <g
                     id="x-axis-main"
                     transform={`translate(0,${parentHeight - graphMargin.top})`}
-                    className="stroke-current text-chart-grid-grey font-inconsolata-regular stroke-0"
+                    className="stroke-current stroke-0 text-chart-grid-grey font-inconsolata-regular"
                 ></g>
                 <g
                     id="y-axis-main"
                     transform={`translate(${graphMargin.left}, 0)`}
-                    className="stroke-current text-chart-grid-grey font-inconsolata-regular stroke-0"
+                    className="stroke-current stroke-0 text-chart-grid-grey font-inconsolata-regular"
                 ></g>
                 <AxisLines parentWidth={parentWidth} parentHeight={parentHeight} />
                 <g id="points-main"></g>

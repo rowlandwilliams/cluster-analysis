@@ -1,7 +1,7 @@
 import { selectAll } from 'd3-selection';
+import { clusterStore } from './../../../../../store/cluster';
 import { getClusterYAxis } from './../../utils/shared';
 import { getClusterXAxis, plotPoints } from '../../utils/shared';
-import { useStore } from '../../../../../store/store';
 import { getGraphSelections, getXScale, getYScale } from '../../../../utils/plot';
 
 export const plotZoomGraph = (
@@ -9,7 +9,7 @@ export const plotZoomGraph = (
     parentHeight: number,
     zoomGraphDomains: number[][],
 ) => {
-    const { pointsData } = useStore.getState();
+    const { pointsData } = clusterStore.getState();
     const { xAxisGroup, yAxisGroup, pointsGroup } = getGraphSelections('zoom');
 
     const xDomain = [zoomGraphDomains[0][0], zoomGraphDomains[1][0]];

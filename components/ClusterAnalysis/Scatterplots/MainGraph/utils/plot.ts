@@ -2,7 +2,7 @@ import { debounce } from 'lodash';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { Selection } from 'd3-selection';
 import { brush, BrushBehavior } from 'd3-brush';
-import { useStore } from '../../../../../store/store';
+import { clusterStore } from '../../../../../store/cluster';
 import { getClusterXAxis, getClusterYAxis, plotPoints } from '../../utils/shared';
 import { getGraphSelections, getXScale, getYScale, graphMargin } from '../../../../utils/plot';
 
@@ -34,7 +34,7 @@ export const updateZoomGraphDomains = (
         ),
     );
 
-    const { setZoomGraphDomains } = useStore.getState();
+    const { setZoomGraphDomains } = clusterStore.getState();
 
     const handleBrushUpdate = debounce(() => {
         setZoomGraphDomains(brushedDatesDomain as number[][]);
@@ -47,7 +47,7 @@ export const setInitialBrush = (
     brushGroup: Selection<SVGGElement, unknown, HTMLElement, never>,
     brushGenerator: BrushBehavior<unknown>,
 ) => {
-    const { zoomGraphDomains } = useStore.getState();
+    const { zoomGraphDomains } = clusterStore.getState();
 
     // call brush function and set initial position / position on time label click
     brushGroup
@@ -59,7 +59,7 @@ export const setInitialBrush = (
 };
 
 export const plotMainGraph = (parentWidth: number, parentHeight: number) => {
-    const { pointsData } = useStore.getState();
+    const { pointsData } = clusterStore.getState();
     const { xAxisGroup, yAxisGroup, brushGroup, pointsGroup } = getGraphSelections();
 
     const xAxisScale = getXScale(parentWidth);

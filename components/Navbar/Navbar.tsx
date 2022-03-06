@@ -9,13 +9,14 @@ import { NavbarLink } from './NavbarLink/NavbarLink';
 const navItems = [
     { href: '', activeImgSrc: ClusterIcon, inactiveImgSrc: ClustorIconBw },
     { href: 'linegraph', activeImgSrc: LineGraphIcon, inactiveImgSrc: LineGraphIconBw },
+    { href: 'sankey', activeImgSrc: LineGraphIcon, inactiveImgSrc: LineGraphIconBw },
 ];
 
 export const Navbar = () => {
     const router = useRouter();
     const { pathname } = router;
     return (
-        <nav className="bg-header-gray h-full w-16">
+        <nav className="w-16 h-full bg-header-gray">
             {navItems.map((item) => (
                 <NavbarLink {...item} key={item.href} pathname={pathname} />
             ))}
